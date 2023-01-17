@@ -1,3 +1,5 @@
+import webpack from 'webpack';
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -14,12 +16,6 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
-    script: [
-      { src: "https://code.jquery.com/jquery-3.5.1.min.js", async: true, defer: true },
-      { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js", async: true, defer: true },
-      { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js", async: true, defer: true },
-      { src: "https://code.jquery.com/jquery-3.5.1.min.js", async: true, defer: true }
-    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -48,5 +44,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ['gsap'],
+    vendor: ["jquery"],
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      })
+    ]
   }
 }

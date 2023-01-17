@@ -9,7 +9,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@barba/core": "^2.9.7",
     "core-js": "^3.25.3",
+    "gsap": "^3.9.1",
+    "jquery": "^3.6.3",
     "locomotive-scroll": "^4.1.4",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",

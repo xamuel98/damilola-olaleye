@@ -6,17 +6,7 @@
 
 <script>
 export default {
-    methods: {
-        setHtmlAttribute() {
-            if(process.client) {
-                let html = document.querySelector('html');
-                html.setAttribute('style', 'cursor: auto; --vh:9.75px;');
-            }
-        }
-    },
-    mounted() {
-        this.setHtmlAttribute();
-    }
+
 }
 </script>
 
