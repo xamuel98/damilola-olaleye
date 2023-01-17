@@ -1,0 +1,104 @@
+:root {
+    --color-lightorange: #FEFBE8;
+    --color-primary: #F0860A;
+    --color-darkprimary: #D96406;
+    --section-padding: clamp(5em, 21vh, 12em);
+    --container-padding: clamp(2.5em, 8vw, 8em);
+    --gap-padding: clamp(1.5em, 4vw, 2.5em);
+    @media screen and (max-width: 540px) {
+        --color-border: rgba(28, 29, 32, 0.225);
+        --color-border-light: rgba(255, 255, 255, 0.225);
+        --container-padding: clamp(1.25em, 4vw, 2.5em);
+        --section-padding: max(2.5em, 12vh);
+    }
+
+    @media screen and (max-width: 720px) {
+        --section-padding: 5vh;
+    }
+    
+    @media screen and (max-width: 1200px) {
+        --container-padding: 6vw;
+    }
+}
+
+
+
+*, *:after, *:before { margin: 0; padding: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+li, ul {padding: 0; margin: 0; list-style: none;}
+
+html, body {
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    // background-color: var(--color-dark);
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    font-family: $fontRegular;
+    // color: var(--color-text);
+    line-height: 1.6;
+    font-weight: 450;
+    font-style: normal;
+    font-size: 16px;
+    font-size: clamp(16px, 1.2vw, 19px);
+    // background-color: var(--color-dark);
+}
+
+/* Selection */
+::selection {
+    // background-color: var(--color-blue); 
+    // color: var(--color-white); 
+    text-shadow: none;
+}
+::-moz-selection {
+    // background-color: var(--color-blue); 
+    // color: var(--color-white); 
+    text-shadow: none;
+}
+
+audio, canvas, iframe, img, svg, video {
+    vertical-align: middle;
+}
+
+svg {
+    max-width: none;
+    height: auto;
+    box-sizing: border-box;
+}
+
+canvas, img, video {
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+img {
+    border: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, ul, ol, span, strong, em  {padding: 0; margin: 0; font-style: normal; font-weight: 450; letter-spacing: normal;}
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, p:last-child, p.big:last-child, p.small:last-child, a:last-child, strong:last-child  {margin-bottom: 0;}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.flex-column {
+    display: block;
+    width: 100%;
+    order: 2;
+    position: relative;
+}
+
+.place-item-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+}

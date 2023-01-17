@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Tt commons regular';
+    src: url('../fonts/Tt-Commons/Tt-Commons-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Tt commons medium';
+    src: url('../fonts/Tt-Commons/Tt-Commons-Medium.ttf') format('truetype');
+}
+
+$fontRegular: 'Tt commons regular';
+$fontMedium: 'Tt commons medium';
