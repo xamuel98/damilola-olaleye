@@ -28,7 +28,11 @@ export default {
     {
       src: "~/plugins/locomotiveScroll.js",
       mode: "client"
-    }
+    },
+    {
+      src: "~/plugins/vue-confetti.js",
+      mode: "client"
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,6 +56,15 @@ export default {
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
       })
-    ]
+    ],
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
+      })
+    },
   }
 }

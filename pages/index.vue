@@ -26,7 +26,7 @@
                         <h4 class="span-lines animate">I want you to be my valentine! And to mark a milestone of our six months together, I would love to take you out on a date. How about we go to a movie and grab dinner next Friday evening?</h4>
                     </div>
                     <div class="flex-column place-item-center">
-                        <div class="damilola-accept-proposal btn-click magnetic accept-proposal place-item-center">
+                        <div @click.prevent="playSound" class="damilola-accept-proposal btn-click magnetic accept-proposal place-item-center">
                             <div class="damilola-accept-proposal-fill btn-fill" style="transform: translate(0px, -76%);"></div>
                             <div class="damilola-accept-proposal-text btn-text text-center">
                                 <p class="request">Kindly click on this button</p>
@@ -47,7 +47,51 @@
 </template>
 
 <script>
+import audioFile from "../assets/sounds/short-crowd-cheer.mp3";
+
+let maxParticleCount = 150; //set max confetti count
+let particleSpeed = 2;
+let colors = ["DodgerBlue", "OliveDrab", "Gold", "Pink", "SlateBlue", "LightBlue", "Violet", "PaleGreen", "SteelBlue", "SandyBrown", "Chocolate", "Crimson"]
+let streamingConfetti = false;
+let animationTimer = null;
+let particles = [];
+let waveAngle = 0;
+
+
 export default {
     name: 'Index',
+    methods: {
+        playSound() {
+            if(process.client) {
+                let audio = new Audio(audioFile);
+                audio.play();
+                this.initConfetti();
+            }
+        },
+        initConfetti() {
+            this.$confetti.start({
+                particles: [
+                    {
+                        type: 'rect',
+                    }
+                ],
+                defaultColors: [
+                    'red',
+                    'pink',
+                    '#ba0000',
+                ],
+            });
+
+            setTimeout(this.stopConfetti, 8000);
+        },
+        stopConfetti() {
+            this.$confetti.stop();
+        }
+    },
+    beforeDestroy() {
+        this.stopConfetti();
+    },
+    mounted() {
+    }
 }
 </script>

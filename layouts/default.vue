@@ -372,6 +372,12 @@ export default {
             const dateTime = new Date();
             const formattedDateTime = this.formatter.format(dateTime);
             this.localTime.textContent = formattedDateTime;
+        },
+        initMusic() {
+            // if(this.isSoundEnabled) { 
+                let audio = new Audio(require('@/assets/sounds/sound.mp4'));
+                audio.play();
+            // }
         }
     },
     mounted() {
@@ -383,11 +389,14 @@ export default {
         this.initTimeZone();
         this.initScrolltriggerAnimations();
         this.initImageFadingSlider();
+        // this.initMusic();
 
         if(process.client) {
             window.addEventListener('load', () => {
                 this.initSmoothScroll();
-            })
+            });
+
+            
         }
     }
 }
