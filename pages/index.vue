@@ -1,6 +1,6 @@
 <template>
     <div class="damilola-wrapper" data-scroll-container>
-        <header class="damilola-header" data-scroll-section>
+        <header class="damilola-header" data-scroll-section data-scroll-section-id="section1">
             <div class="damilola-header-image overlay" data-scroll data-scroll-speed="-3" data-scroll-position="top">
                 <img src="@/assets/images/image-1.jpg" alt="">
             </div>
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </header>
-        <section class="damilola-body-intro" data-scroll-section>
+        <section class="damilola-body-intro" data-scroll-section data-scroll-section-id="section2">
             <div class="container medium">
                 <div class="row">
                     <div class="flex-column">
@@ -34,6 +34,12 @@
                 </div>
             </div>
         </section>
+        <div class="footer-rounded-div" data-scroll-section data-scroll-section-id="section3">
+            <div class="rounded-div-wrap" style="height: 44px;">
+                <div class="rounded-div"></div>
+            </div>
+        </div>
+        <Footer />
     </div>
 </template>
 

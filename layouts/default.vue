@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {gsap, Power4, Power2, Power3} from 'gsap';
+import {gsap, Power4, Power2, Power3, Elastic} from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import barba from "@barba/core";
 
@@ -13,6 +13,12 @@ if(process.client) gsap.registerPlugin(ScrollTrigger);
 let scroll;
 
 export default {
+    data() {
+        return {
+            localTime: null,
+            formatter: null,
+        }
+    },
     methods: {
         /**
         * Window Inner Height Check
@@ -173,6 +179,16 @@ export default {
                             ease: Power3.easeIn,
                         });
                     }
+
+                    // For date location
+                    if($(this).find(".btn-text-inner.change").length) {
+                        gsap.to($(this).find(".btn-text-inner.change"), .3, {
+                            startAt: {color: "#1C1D20"},
+                            color: "#1C1D20",
+                            ease: Power3.easeIn,
+                        });
+                    }
+
                     $(this.parentNode).removeClass('not-active');
                 });
 
@@ -191,14 +207,23 @@ export default {
                             delay: .3
                         });
                     }
+
+                    // For date location
+                    if($(this).find(".btn-text-inner.change").length) {
+                        gsap.to($(this).find(".btn-text-inner.change"), .3, {
+                            color: "#FEFBE8",
+                            ease: Power3.easeOut,
+                            delay: .3
+                        });
+                    }
                     $(this.parentNode).removeClass('not-active');
                 });
             }
         },
-        initSmoothScroll(container) {
+        initSmoothScroll() {
             scroll = new this.LocomotiveScroll({
                 el: document.querySelector('[data-scroll-container]'),
-                smooth: true,
+                smooth: true
             });
 
             window.onresize = scroll.update();
@@ -235,6 +260,100 @@ export default {
 
             // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
             ScrollTrigger.refresh();
+        },
+        /**
+        * Scrolltrigger Animations Desktop + Mobile
+        */
+        initScrolltriggerAnimations() {
+            // Disable GSAP on Mobile
+            // Source: https://greensock.com/forums/topic/26325-disabling-scrolltrigger-on-mobile-with-mediamatch/
+            ScrollTrigger.matchMedia({
+                
+                // Desktop Only Scrolltrigger 
+                "(min-width: 721px)": function() {
+                
+                    if(document.querySelector(".damilola-footer")) {
+                        // Scrolltrigger Animation : Footer General Footer
+                        $(".damilola-footer").each(function (index) {
+                            let triggerElement = $(this);
+                            let targetElementRound = $(".footer-rounded-div .rounded-div-wrap");
+                            let targetElementArrow = $("footer .arrow");
+                        
+                            let tl = gsap.timeline({
+                                scrollTrigger: {
+                                    trigger: triggerElement,
+                                    start: "0% 100%",
+                                    end: "100% 100%",
+                                    scrub: 0
+                                }
+                            });
+                            tl.to(targetElementRound, {
+                                height: 0,
+                                ease: "none"
+                                }, 0)
+                                .from(targetElementArrow, {
+                                rotate: 15,
+                                ease: "none"
+                            }, 0);
+                        });
+                    }
+                }, // End Desktop Only Scrolltrigger
+
+                // Mobile Only Scrolltrigger
+                "(max-width: 720px)": function() {
+                
+                if(document.querySelector(".damilola-footer")) {
+                // Scrolltrigger Animation : Footer
+                    $(".damilola-footer").each(function (index) {
+                        let triggerElement = $(this);
+                        let targetElementRound = $(".footer-rounded-div .rounded-div-wrap");
+                    
+                        let tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: triggerElement,
+                            start: "0% 100%",
+                            end: "100% 100%",
+                            scrub: 0
+                        }
+                        });
+                        tl.to(targetElementRound, {
+                        height: 0,
+                        ease: "none"
+                        }, 0);
+                    });
+                }
+                
+                } // End Mobile Only Scrolltrigger
+
+            })
+        },
+        /**
+        * Footer Time Zone
+        */
+        initTimeZone() {
+            if(process.client){
+                this.localTime = document.querySelector(".local-time");
+
+                const optionsTime = {
+                    timeZone: 'Africa/Lagos',
+                    timeZoneName: 'short',
+                    hour: '2-digit',
+                    hour12: 'true',
+                    minute: 'numeric',
+                    second: 'numeric',
+                };
+
+                this.formatter = Intl.DateTimeFormat('en-US', optionsTime);
+                // let getUserTimeZone = this.formatter.resolvedOptions();
+                // log(getUserTimeZone.timeZone)
+                this.updateTimeHelper();
+                setInterval(this.updateTimeHelper, 1000);
+            }
+        },
+        updateTimeHelper() {
+            const dateTime = new Date();
+            const formattedDateTime = this.formatter.format(dateTime);
+            this.localTime.textContent = formattedDateTime;
         }
     },
     mounted() {
@@ -243,6 +362,8 @@ export default {
         this.initScrolltriggerNav();
         this.initScrollLetters();
         this.initMagneticButtons();
+        this.initTimeZone();
+        this.initScrolltriggerAnimations();
 
         if(process.client) {
             window.addEventListener('load', () => {
