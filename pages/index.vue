@@ -2,7 +2,10 @@
     <div class="damilola-wrapper" data-scroll-container>
         <header class="damilola-header" data-scroll-section data-scroll-section-id="section1">
             <div class="damilola-header-image overlay" data-scroll data-scroll-speed="-3" data-scroll-position="top">
-                <img src="@/assets/images/image-1.jpg" alt="">
+                <img src="@/assets/images/image-1.jpg" alt="" class="slide">
+                <img src="@/assets/images/image-2.jpg" alt="" class="slide">
+                <img src="@/assets/images/image-3.jpg" alt="" class="slide">
+                <img src="@/assets/images/image-4.jpg" alt="" class="slide">
             </div>
             <Navbar />
             <div class="damilola-name">

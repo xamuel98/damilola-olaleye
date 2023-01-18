@@ -57,6 +57,24 @@ export default {
             });
         },
         /**
+         * Home Slider
+         */
+        initImageFadingSlider() {
+            if(process.client) {
+                let slides = document.querySelectorAll('.slide');
+
+                let tl = gsap.timeline({
+                    repeat: -1,
+                    repeatDelay: 0
+                });
+
+                slides.forEach((slide) => {
+                    tl.fromTo(slide, {duration: 1, opacity: 0}, {opacity: 1})   
+                    .to(slide, {duration: 1, opacity: 0}, "+=1");
+                });
+            }
+        },
+        /**
         * Scrolltrigger Scroll Check
         */
         initScrolltriggerNav() {  
@@ -364,6 +382,7 @@ export default {
         this.initMagneticButtons();
         this.initTimeZone();
         this.initScrolltriggerAnimations();
+        this.initImageFadingSlider();
 
         if(process.client) {
             window.addEventListener('load', () => {
